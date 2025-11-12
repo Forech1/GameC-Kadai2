@@ -33,13 +33,21 @@ public:
 class Reversi {
 private:
 	static const int _massMax = 8;
-	MassDate mass[_massMax][_massMax];
+	std::shared_ptr<MassDate[][_massMax]> mass = std::shared_ptr<MassDate[][_massMax]>(new MassDate[_massMax][_massMax]);
+	IsMass playerMassCol;
+	IsMass enemyMassCol;
 
 public:
-	Reversi();
+	Reversi(IsMass _playerMass,IsMass _enemyMass);
 	IsMass FindMassDate(int x, int y);
 	bool SetMassDate(int x, int y, IsMass setIsMass);
 	void ShowGrid();
+	bool InputSetMass(IsMass setIsMass);
+	void Variation(IsMass targetMass, IsMass myMass);
+
+private:
+	int InputFx(char endif = 'e', char returnif = '0');
+	void AllCheack();
 };
 
 
