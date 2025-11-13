@@ -2,68 +2,38 @@
 #include <string>
 #include <iostream>
 #include "Reversi.h"
+#include <memory> 
 
 int main() {
 	using namespace std;
 
-	Reversi gamedate(IsMass::White,IsMass::Black,8);
+	int maxsize = 8;
+	auto gamedate = std::make_shared<Reversi>(IsMass::White, IsMass::Black, maxsize);
+	ReversiAI ai(gamedate, maxsize);
 
 	bool endFlag = false;
-	//gamedate.SetMassDate(0, 0, IsMass::White);
-	//gamedate.SetMassDate(0, 3, IsMass::White);
-	//gamedate.SetMassDate(0, 4, IsMass::White);
-	//gamedate.SetMassDate(0, 7, IsMass::White);
 
-	//gamedate.SetMassDate(3, 0, IsMass::White);
-	//gamedate.SetMassDate(4, 0, IsMass::White);
-	//gamedate.SetMassDate(7, 0, IsMass::White);
+	gamedate->SetMassDate(3, 3, gamedate->GetPlayerColor());
+	gamedate->SetMassDate(4, 4, gamedate->GetPlayerColor());
+	gamedate->SetMassDate(3, 4, gamedate->GetEnemyColor());
+	gamedate->SetMassDate(4,3, gamedate->GetEnemyColor());
 
-	//gamedate.SetMassDate(3, 7, IsMass::White);
-	//gamedate.SetMassDate(4, 7, IsMass::White);
-	//gamedate.SetMassDate(7, 7, IsMass::White);
-
-	//gamedate.SetMassDate(7, 3, IsMass::White);
-	//gamedate.SetMassDate(7, 4, IsMass::White);
-
-	//gamedate.SetMassDate(1, 1, IsMass::Black);
-	//gamedate.SetMassDate(2, 2, IsMass::Black);
-
-	//gamedate.SetMassDate(1, 3, IsMass::Black);
-	//gamedate.SetMassDate(2, 3, IsMass::Black);
-	//gamedate.SetMassDate(1, 4, IsMass::Black);
-	//gamedate.SetMassDate(2, 4, IsMass::Black);
-
-	//gamedate.SetMassDate(1, 6, IsMass::Black);
-	//gamedate.SetMassDate(2, 5, IsMass::Black);
-	//gamedate.SetMassDate(1, 6, IsMass::Black);
-	//gamedate.SetMassDate(2, 5, IsMass::Black);
-
-	//gamedate.SetMassDate(0, 1, IsMass::Black);
-	//gamedate.SetMassDate(0, 2, IsMass::Black);
-	//gamedate.SetMassDate(0, 3, IsMass::Black);
-	//gamedate.SetMassDate(0, 4, IsMass::Black);
-	//gamedate.SetMassDate(0, 5, IsMass::Black);
-	//gamedate.SetMassDate(0, 6, IsMass::Black);
-	//gamedate.SetMassDate(0, 7, IsMass::White);
 	do {
 
+		gamedate->ShowGrid();
 
-		
-		gamedate.ShowGrid();
+		endFlag = ai.InputSetMass(gamedate->GetPlayerColor(), gamedate->GetEnemyColor());
 
-		endFlag = gamedate.InputSetMass(IsMass::White);
+		gamedate->ShowGrid();
+		if(!endFlag)
+			ai.RandomSetMass(gamedate->GetEnemyColor(), gamedate->GetPlayerColor(),"“G‚Í");
 
-		//gamedate.Variation(gamedate.GetPlayerColor(), gamedate.GetPlayerColor());
-		gamedate.Variation(gamedate.GetEnemyColor(), gamedate.GetPlayerColor());
-		//gamedate.Variation(gamedate.GetPlayerColor(), gamedate.GetEnemyColor());
+		endFlag = gamedate->EndGame();
 
-		
-
-		gamedate.ShowGrid();
 	} while (!endFlag);
 
 
-
+	//cout << "ƒQ[ƒ€ƒGƒ“ƒh" << '\n';
 
 	
 
