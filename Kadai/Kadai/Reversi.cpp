@@ -20,7 +20,7 @@ void MassDate::SetThisMass(IsMass ismass) {
 }
 
 
-Reversi::Reversi(IsMass _playerMass, IsMass _enemyMass) {
+Reversi::Reversi(IsMass _playerMass, IsMass _enemyMass, int massMax):_massMax(massMax),mass(_massMax,std::vector<MassDate>(_massMax)) {
 	for (int y = 0; y < _massMax; y++) {
 		for (int x = 0; x < _massMax; x++) {
 			mass[y][x].SetThisMass(IsMass::None);
@@ -31,7 +31,7 @@ Reversi::Reversi(IsMass _playerMass, IsMass _enemyMass) {
 }
 
 //xy指定した場所のマスデータを取得
-IsMass Reversi::FindMassDate(int x, int y) {
+IsMass Reversi::FindMassDate(int x, int y) const {
 	//範囲内
 	if (x >= _massMax)
 		return IsMass::Error;
@@ -61,7 +61,7 @@ bool Reversi::SetMassDate(int x, int y, IsMass setIsMass) {
 	return true;
 }
 
-void Reversi::ShowGrid() {
+void Reversi::ShowGrid()const {
 	cout << "＠|";
 	for (int i = 1; i < _massMax+1; i++) {
 		
@@ -242,7 +242,26 @@ void Reversi::Variation(IsMass targetMass,IsMass myMass) {
 		for (int x = 0; x < _massMax; x++) {
 			
 			if (mass[y][x].GetThisMass() != myMass)
-				break;
+				continue;
+
+			//各方向でマスの状態を確認し、マスに変更を行います。
+
+			//x++
+			AllCheack(y, x, targetMass, myMass, 0, 1);
+			//x--
+			AllCheack(y, x, targetMass, myMass, 0, -1);
+			//y++
+			AllCheack(y, x, targetMass, myMass, 1, 0);
+			//y--
+			AllCheack(y, x, targetMass, myMass, -1, 0);
+			//x+y+
+			AllCheack(y, x, targetMass, myMass, 1, 1);
+			//x-y-
+			AllCheack(y, x, targetMass, myMass, -1, -1);
+			//x+y-
+			AllCheack(y, x, targetMass, myMass, -1, 1);
+			//y-x+
+			AllCheack(y, x, targetMass, myMass, 1, -1);
 
 
 
@@ -250,32 +269,43 @@ void Reversi::Variation(IsMass targetMass,IsMass myMass) {
 	}
 }
 
-void Reversi::AllCheack(int x,int y, IsMass targetMass, IsMass myMass,int _x,int _y) {
+//五目のチェックシステムを元に作られたマス確認システムのC++バージョン
+void Reversi::AllCheack(int y,int x, IsMass targetMass, IsMass myMass,int _y,int _x) {
+
+	int count = 0;
 
 	//横での確認
 	for (int z = 1; z < _massMax + 1; z++) {
 
-		int count = 0;
+		
 
 		//オーバーで終了
-		if (x + z >= _massMax)
+		if ( x+(z*_x) >= _massMax || y + (z * _y) >= _massMax  || x + (z * _x) < 0 || y + (z * _y) < 0)
 			break;
 
 		//自分のマスを確認したら
-		if (mass[y][x + z].GetThisMass() == myMass)
+		if (mass[y + (z * _y)][x + (z * _x)].GetThisMass() == myMass)
 		{
 			//それまでのマスを全て変える
-			int _z = x + z;
-			for (int i = 0; i < count; i++) {
-				mass[y][_z - i].SetThisMass(myMass);
+			int _xz = x + (z * _x);
+			int _yz = y + (z * _y);
+			for (int i = 1; i <= count; i++) {
+				/*cout << _yz - (i * _y) << " " << _xz - (i * _x)<<'\n';*/
+				mass[_yz - (i * _y)][_xz - (i* _x)].SetThisMass(myMass);
 			}
+			/*cout << '\n';*/
+			break;
 		}
-		//空欄なら終了
-		if (mass[y][x + z].GetThisMass() == IsMass::None) {
+		//敵ますなら続行
+		else if (mass[y + (z * _y)][x + (z * _x)].GetThisMass() == targetMass) {
+			count++;
+		}
+		//空欄やそれ以外なら終了
+		else {
 			break;
 		}
 
-		count++;
+		
 	}
 }
 
