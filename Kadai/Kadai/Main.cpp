@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include "Reversi.h"
+#include "Time.h"
 #include <memory> 
 
 int main() {
@@ -10,6 +11,7 @@ int main() {
 	int maxsize = 8;
 	auto gamedate = std::make_shared<Reversi>(IsMass::White, IsMass::Black, maxsize);
 	ReversiAI ai(gamedate, maxsize);
+	Timer time=Timer();
 
 	bool endFlag = false;
 
@@ -25,6 +27,11 @@ int main() {
 		endFlag = ai.InputSetMass(gamedate->GetPlayerColor(), gamedate->GetEnemyColor());
 
 		gamedate->ShowGrid();
+
+		cout << "“G‚ªl‚¦‚Ä‚¢‚Ü‚·c" << '\n';
+
+		time.WaitTime(1.5f);
+
 		if(!endFlag)
 			ai.RandomSetMass(gamedate->GetEnemyColor(), gamedate->GetPlayerColor(),"“G‚Í");
 
