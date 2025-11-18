@@ -72,6 +72,7 @@ public:
 	bool SetCheackVariation(IsMass targetMass, IsMass myMass, int y, int x);
 	std::vector<std::vector<int>> FindAllOkSetMassPoints(IsMass targetMass, IsMass myMass);
 	bool EndGame();
+	void Result();
 
 private:
 

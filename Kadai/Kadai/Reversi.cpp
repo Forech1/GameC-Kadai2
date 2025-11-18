@@ -1,4 +1,4 @@
-//ƒŠƒo[ƒV‚Ìƒf[ƒ^‚ğ•Û‘¶‚µ‚Ä‚¢‚Ü‚·B
+ï»¿//ãƒªãƒãƒ¼ã‚·ã®ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜ã—ã¦ã„ã¾ã™ã€‚
 #include <string>
 #include <iostream>
 #include "Reversi.h"
@@ -16,7 +16,7 @@ MassDate::MassDate() {
 MassDate::MassDate(IsMass startDate) {
 	thisMass = startDate;
 }
-//ƒ}ƒXƒf[ƒ^‚ğƒZƒbƒg
+//ãƒã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆ
 void MassDate::SetThisMass(IsMass ismass) {
 	thisMass = ismass;
 }
@@ -32,9 +32,9 @@ Reversi::Reversi(IsMass _playerMass, IsMass _enemyMass, int massMax):_massMax(ma
 	enemyMassCol = _enemyMass;
 }
 
-//xyw’è‚µ‚½êŠ‚Ìƒ}ƒXƒf[ƒ^‚ğæ“¾
+//xyæŒ‡å®šã—ãŸå ´æ‰€ã®ãƒã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
 IsMass Reversi::FindMassDate(int x, int y) const {
-	//”ÍˆÍ“à
+	//ç¯„å›²å†…
 	if (x >= _massMax)
 		return IsMass::Error;
 	if (x < 0)
@@ -46,9 +46,9 @@ IsMass Reversi::FindMassDate(int x, int y) const {
 
 	return mass[y][x].GetThisMass();
 }
-//ƒ}ƒX‚ğƒZƒbƒg‚µ‚Ü‚·
+//ãƒã‚¹ã‚’ã‚»ãƒƒãƒˆã—ã¾ã™
 bool Reversi::SetMassDate(int x, int y, IsMass setIsMass) {
-	//”ÍˆÍ“à
+	//ç¯„å›²å†…
 	if (x >= _massMax)
 		return false;
 	if (x < 0)
@@ -63,7 +63,7 @@ bool Reversi::SetMassDate(int x, int y, IsMass setIsMass) {
 	return true;
 }
 
-//ƒ‹[ƒ‹‚Éæ‚Áæ‚Á‚Äƒ}ƒX‚ğƒZƒbƒg‚µ‚Ü‚·B
+//ãƒ«ãƒ¼ãƒ«ã«ä¹—ã£å–ã£ã¦ãƒã‚¹ã‚’ã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
 bool Reversi::RuleSetMassDate(int x, int y, IsMass setIsMass,IsMass targetMass) {
 	if (SetCheack(targetMass, setIsMass,y,x)) {
 
@@ -74,12 +74,12 @@ bool Reversi::RuleSetMassDate(int x, int y, IsMass setIsMass,IsMass targetMass) 
 	}
 	return false;
 }
-//ƒ‹[ƒ‹‚Éæ‚Áæ‚Á‚Äƒ}ƒX‚ğƒZƒbƒg‚µ‚ÄA‰e‹¿‚·‚éƒ}ƒX‚ğ‚·‚×‚Ä‚Ğ‚Á‚­‚è•Ô‚µ‚Ü‚·B
+//ãƒ«ãƒ¼ãƒ«ã«ä¹—ã£å–ã£ã¦ãƒã‚¹ã‚’ã‚»ãƒƒãƒˆã—ã¦ã€å½±éŸ¿ã™ã‚‹ãƒã‚¹ã‚’ã™ã¹ã¦ã²ã£ãã‚Šè¿”ã—ã¾ã™ã€‚
 bool Reversi::RuleSetAndVariationMassDate(int x, int y, IsMass setIsMass, IsMass targetMass) {
 	if (SetMassDate(x, y, setIsMass)) {
 		
 		if (SetCheackVariation(targetMass, setIsMass, y, x)) {
-			//cout << "‹–‰Â" << '\n';
+			//cout << "è¨±å¯" << '\n';
 			return true ;
 		}
 			
@@ -90,13 +90,13 @@ bool Reversi::RuleSetAndVariationMassDate(int x, int y, IsMass setIsMass, IsMass
 		}
 			
 	}
-	//cout << "”ÍˆÍŠO”z’u" << '\n';
+	//cout << "ç¯„å›²å¤–é…ç½®" << '\n';
 	return false;
 }
 
-//ƒOƒŠƒbƒh‚ğ•\¦‚µ‚Ü‚·
+//ã‚°ãƒªãƒƒãƒ‰ã‚’è¡¨ç¤ºã—ã¾ã™
 void Reversi::ShowGrid()const {
-	cout << "—|";
+	cout << "ï¼ |";
 	for (int i = 1; i < _massMax+1; i++) {
 		
 		cout << std::format("{:2}",i) << "|";
@@ -106,14 +106,14 @@ void Reversi::ShowGrid()const {
 	for (int y = 1; y < _massMax + 1; y++) {
 		cout << std::format("{:2}", y) + "|";
 		for (int x = 1; x < _massMax + 1; x++) {
-			string fripMass="@";
+			string fripMass="ã€€";
 			switch (mass[y-1][x - 1].GetThisMass())
 			{
 			case IsMass::Black:
-					fripMass = "Z";
+					fripMass = "ï¼ ";
 					break;
 			case IsMass::White:
-				fripMass = "—";
+				fripMass = "ã€‡";
 				break;
 			}
 
@@ -125,152 +125,8 @@ void Reversi::ShowGrid()const {
 	
 }
 
-////I—¹‚È‚çtrue‚ª•Ô‚Á‚Ä‚«‚Ü‚·
-//bool Reversi::InputSetMass(IsMass setIsMass, IsMass targetMass) {
-//	string coments[12] = { "“ü—Íó•tó‘ÔF1`",
-//		"o‰¡²p‚Å”z’u‚µ‚½‚¢ˆÊ’u‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B : o0p‚Å“ü—Í’l‚ğƒŠƒZƒbƒg‚µ‚Ü‚·",
-//		"oc²p‚Å”z’u‚µ‚½‚¢ˆÊ’u‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B : o0p‚Å“ü—Í’l‚ğƒŠƒZƒbƒg‚µ‚Ü‚·",
-//		"”š‚Å1`",
-//		"‚ ‚È‚½‚Í",
-//		"c",
-//		"‰¡",
-//		"‚ÌˆÊ’u‚É”z’u‚µ‚Ü‚µ‚½B" ,
-//		"‚»‚±‚É‚Í‚·‚Å‚É‰½‚©‚ª‘¶İ‚µ‚Ü‚·B",
-//		"‚»‚ÌˆÊ’u‚Íƒ}ƒX‚ğ’u‚¯‚Ü‚¹‚ñB",
-//		"‚Ü‚Å‚Ì’l‚ğó‚¯•t‚¯‚Ü‚·B‚Ü‚½Aoep‚Æ‘Å‚Â‚ÆI—¹‚µ‚Ü‚·",
-//		"‚Ü‚Å‚Ì’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B"
-//	};
-//
-//	bool returnEnd = false;
-//	bool returnFlag = false;
-//	int setPoint[2] = { 0,0 };
-//	do {
-//		returnFlag = false;
-//
-//		cout << coments[0]<<_massMax<<coments[10]<<  '\n';
-//
-//
-//		bool endFlagY = false;
-//		bool endFlagX = false;
-//		do {
-//			cout << coments[1] << '\n';
-//
-//			int input = Reversi::InputFx();
-//
-//			if (input == -1) {
-//				cout << coments[3]<< _massMax << coments[11] << '\n';
-//			}
-//			else if (input == -2) {
-//				returnEnd = true;
-//				endFlagY = true;
-//				endFlagX = true;
-//			}
-//			else if (input == -3) {
-//				endFlagY = true;
-//				endFlagX = true;
-//				returnFlag = true;
-//			}
-//			else {
-//				setPoint[1] = input;
-//				endFlagX = true;
-//			}
-//
-//		} while (!endFlagX);
-//
-//		if (!endFlagY) {
-//			do {
-//				cout << coments[2] << '\n';
-//
-//				int input = Reversi::InputFx();
-//
-//				if (input == -1) {
-//					cout << coments[3] << _massMax << coments[11]<< '\n';
-//				}
-//				else if (input == -2) {
-//					returnEnd = true;
-//					endFlagY = true;
-//					endFlagX = true;
-//				}
-//				else if (input == -3) {
-//					endFlagY = true;
-//					endFlagX = true;
-//					returnFlag = true;
-//				}
-//				else {
-//					setPoint[0] = input;
-//					endFlagY = true;
-//				}
-//
-//			} while (!endFlagY);
-//		}
-//
-//		if(!returnEnd)
-//			if (Reversi::FindMassDate(setPoint[1], setPoint[0]) != IsMass::None) {
-//				cout << coments[9] << '\n';
-//				returnFlag = true;
-//
-//				Reversi::ShowGrid();
-//			}
-//
-//		if (!returnEnd && !returnFlag) {
-//			if (!Reversi::RuleSetAndVariationMassDate(setPoint[1], setPoint[0], setIsMass, targetMass)) {
-//				cout << coments[9] << '\n';
-//				returnFlag = true;
-//				Reversi::ShowGrid();
-//				continue;
-//			}
-//			string teamMess = "";
-//			if (setIsMass == playerMassCol) {
-//				teamMess = coments[4];
-//			}
-//			//else	if (setIsMass == enemyMassCol) {
-//			//	teamMess = coments[5];
-//			//}
-//
-//			cout << teamMess << coments[6] << setPoint[0] + 1 << coments[5] << setPoint[1] + 1 << coments[7] << '\n';
-//
-//		}
-//
-//		cout << "============================================"<<'\n';
-//
-//	} while (returnFlag);
-//
-//	return returnEnd;
-//}
-//
-////ƒ‰ƒ“ƒ_ƒ€‚Åƒ}ƒX‚ğ”z’u‚µ‚Ü‚·B
-//void Reversi::RandomSetMass(IsMass setIsMass, IsMass targetMass,string mess) {
-//
-//	std::mt19937 engine{ std::random_device{}() };
-//
-//
-//	std::vector<std::vector<int>> randomPoint;
-//	int count = 0;
-//
-//	//”z’u‚Å‚«‚éˆÊ’uƒf[ƒ^‚Ì‚İ‚ğæ“¾
-//	for (int y = 0; y < _massMax; y++) {
-//		for (int x = 0; x < _massMax; x++) {
-//			if (SetCheack(targetMass, setIsMass, y, x)) {
-//				randomPoint.push_back(std::vector<int>());
-//				randomPoint[count].push_back(y);
-//				randomPoint[count].push_back(x);
-//				count++;
-//			}
-//		}
-//	}
-//	std::uniform_int_distribution<int> dist(0, randomPoint.size()-1);
-//
-//	//ƒ‰ƒ“ƒ_ƒ€‚Å’u‚¯‚é”z’u‚ÉÚ’n‚µ‚Ü‚·B
-//	auto target = dist(engine);
-//	RuleSetAndVariationMassDate(randomPoint[target][1], randomPoint[target][0], setIsMass, targetMass);
-//
-//	std::cout << mess << "‰¡" << randomPoint[target][1] + 1 << "c" << randomPoint[target][0] + 1 << "’u‚«‚Ü‚µ‚½B" << '\n';
-//
-//}
-
-
-//Œ»ó‚Ìƒ}ƒX‚Ì’†‚Å•Ï‰»‚ª”­¶‚·‚éê‡‚Íˆ—‚ğs‚¢‚Ü‚·B
-//(•Ï‰»‚·‚é‘ÎÛ‚Ìƒ}ƒX‚Ìí—Ş,Šî€‚É‚È‚éƒ}ƒX)
+//ç¾çŠ¶ã®ãƒã‚¹ã®ä¸­ã§å¤‰åŒ–ãŒç™ºç”Ÿã™ã‚‹å ´åˆã¯å‡¦ç†ã‚’è¡Œã„ã¾ã™ã€‚
+//(å¤‰åŒ–ã™ã‚‹å¯¾è±¡ã®ãƒã‚¹ã®ç¨®é¡,åŸºæº–ã«ãªã‚‹ãƒã‚¹)
 void Reversi::Variation(IsMass targetMass,IsMass myMass) {
 	for (int y = 0; y < _massMax; y++) {
 		for (int x = 0; x < _massMax; x++) {
@@ -278,7 +134,7 @@ void Reversi::Variation(IsMass targetMass,IsMass myMass) {
 			if (mass[y][x].GetThisMass() != myMass)
 				continue;
 
-			//Še•ûŒü‚Åƒ}ƒX‚Ìó‘Ô‚ğŠm”F‚µAƒ}ƒX‚É•ÏX‚ğs‚¢‚Ü‚·B
+			//å„æ–¹å‘ã§ãƒã‚¹ã®çŠ¶æ…‹ã‚’ç¢ºèªã—ã€ãƒã‚¹ã«å¤‰æ›´ã‚’è¡Œã„ã¾ã™ã€‚
 
 			//x++
 			CheackReverse(y, x, targetMass, myMass, 0, 1);
@@ -303,28 +159,28 @@ void Reversi::Variation(IsMass targetMass,IsMass myMass) {
 	}
 }
 
-//ŒÜ–Ú‚Ìƒ`ƒFƒbƒNƒVƒXƒeƒ€‚ğŒ³‚Éì‚ç‚ê‚½ƒ}ƒXŠm”FƒVƒXƒeƒ€‚ÌC++ƒo[ƒWƒ‡ƒ“
+//äº”ç›®ã®ãƒã‚§ãƒƒã‚¯ã‚·ã‚¹ãƒ†ãƒ ã‚’å…ƒã«ä½œã‚‰ã‚ŒãŸãƒã‚¹ç¢ºèªã‚·ã‚¹ãƒ†ãƒ ã®C++ãƒãƒ¼ã‚¸ãƒ§ãƒ³
 bool Reversi::CheackReverse(int y,int x, IsMass targetMass, IsMass myMass,int _y,int _x) {
 
 	int count = 0;
 
-	//‰¡‚Å‚ÌŠm”F
+	//æ¨ªã§ã®ç¢ºèª
 	for (int z = 1; z <= _massMax + 1; z++) {
 
 		
 
-		//ƒI[ƒo[‚ÅI—¹
+		//ã‚ªãƒ¼ãƒãƒ¼ã§çµ‚äº†
 		if (x + (z * _x) >= _massMax || y + (z * _y) >= _massMax || x + (z * _x) < 0 || y + (z * _y) < 0)
 			return false;
 
-		//©•ª‚Ìƒ}ƒX‚ğŠm”F‚µ‚½‚ç
+		//è‡ªåˆ†ã®ãƒã‚¹ã‚’ç¢ºèªã—ãŸã‚‰
 		if (mass[y + (z * _y)][x + (z * _x)].GetThisMass() == myMass)
 		{
 			if(z==1)
 				return false;
 			else {
 
-				//‚»‚ê‚Ü‚Å‚Ìƒ}ƒX‚ğ‘S‚Ä•Ï‚¦‚é
+				//ãã‚Œã¾ã§ã®ãƒã‚¹ã‚’å…¨ã¦å¤‰ãˆã‚‹
 				int _xz = x + (z * _x);
 				int _yz = y + (z * _y);
 				for (int i = 1; i <= count; i++) {
@@ -335,11 +191,11 @@ bool Reversi::CheackReverse(int y,int x, IsMass targetMass, IsMass myMass,int _y
 				return true;
 			}
 		}
-		//“G‚Ü‚·‚È‚ç‘±s
+		//æ•µã¾ã™ãªã‚‰ç¶šè¡Œ
 		else if (mass[y + (z * _y)][x + (z * _x)].GetThisMass() == targetMass) {
 			count++;
 		}
-		//‹ó—“‚â‚»‚êˆÈŠO‚È‚çI—¹
+		//ç©ºæ¬„ã‚„ãã‚Œä»¥å¤–ãªã‚‰çµ‚äº†
 		else {
 			return false;
 		}
@@ -347,30 +203,30 @@ bool Reversi::CheackReverse(int y,int x, IsMass targetMass, IsMass myMass,int _y
 	return false;
 }
 
-//ƒ`ƒFƒbƒN‚Ì‚İs‚¢AƒŠƒo[ƒX‚Í‚µ‚È‚¢B
+//ãƒã‚§ãƒƒã‚¯ã®ã¿è¡Œã„ã€ãƒªãƒãƒ¼ã‚¹ã¯ã—ãªã„ã€‚
 bool Reversi::Cheack(int y, int x, IsMass targetMass, IsMass myMass, int _y, int _x)const {
 
-	//‰¡‚Å‚ÌŠm”F
+	//æ¨ªã§ã®ç¢ºèª
 	for (int z = 1; z < _massMax + 1; z++) {
 
-		//ƒI[ƒo[‚ÅI—¹
+		//ã‚ªãƒ¼ãƒãƒ¼ã§çµ‚äº†
 		if (x + (z * _x) >= _massMax || y + (z * _y) >= _massMax || x + (z * _x) < 0 || y + (z * _y) < 0)
 			return false;
 
-		//©•ª‚Ìƒ}ƒX‚ğŠm”F‚µ‚½‚ç
+		//è‡ªåˆ†ã®ãƒã‚¹ã‚’ç¢ºèªã—ãŸã‚‰
 		if (mass[y + (z * _y)][x + (z * _x)].GetThisMass() == myMass)
 		{
-			//n‚ß‚©‚ç©•ª‚Ü‚·‚Ìê‡‚Í•s‰Â
+			//å§‹ã‚ã‹ã‚‰è‡ªåˆ†ã¾ã™ã®å ´åˆã¯ä¸å¯
 			if (z == 1)
 				return false;
 			else
 				return true;
 		}
-		//“G‚Ü‚·‚È‚ç‘±s
+		//æ•µã¾ã™ãªã‚‰ç¶šè¡Œ
 		else if (mass[y + (z * _y)][x + (z * _x)].GetThisMass() == targetMass) {
 
 		}
-		//‹ó—“‚â‚»‚êˆÈŠO‚È‚çI—¹
+		//ç©ºæ¬„ã‚„ãã‚Œä»¥å¤–ãªã‚‰çµ‚äº†
 		else {
 			return false;
 		}
@@ -378,12 +234,12 @@ bool Reversi::Cheack(int y, int x, IsMass targetMass, IsMass myMass, int _y, int
 	return false;
 }
 
-//‚µ‚Ä‚¢‚Ü‚·‚ª”z’u‰Â”\‚È‚çtrue‚ª‹A‚è‚Ü‚·By
+//ã—ã¦ã„ã¾ã™ãŒé…ç½®å¯èƒ½ãªã‚‰trueãŒå¸°ã‚Šã¾ã™ã€‚y
 bool Reversi::SetCheack(IsMass targetMass, IsMass myMass,int y,int x)const {
 	if (Reversi::FindMassDate(x, y) != IsMass::None)
 		return false;
 
-	//Še•ûŒü‚Åƒ}ƒX‚Ìó‘Ô‚ğŠm”F‚µ‚Ü‚·
+	//å„æ–¹å‘ã§ãƒã‚¹ã®çŠ¶æ…‹ã‚’ç¢ºèªã—ã¾ã™
 	//x++
 	if (Cheack(y, x, targetMass, myMass, 0, 1))
 		return true;
@@ -412,16 +268,16 @@ bool Reversi::SetCheack(IsMass targetMass, IsMass myMass,int y,int x)const {
 	return false;
 }
 
-//‚µ‚Ä‚¢‚Ü‚·‚ª”z’u‰Â”\‚È‚çtrue‚ª‹A‚è‚Ü‚·B‚»‚Ìã¬Œ÷‚µ‚½‚çƒ}ƒX‚à“ü‚ê‘Ö‚í‚è‚Ü‚·B
+//ã—ã¦ã„ã¾ã™ãŒé…ç½®å¯èƒ½ãªã‚‰trueãŒå¸°ã‚Šã¾ã™ã€‚ãã®ä¸ŠæˆåŠŸã—ãŸã‚‰ãƒã‚¹ã‚‚å…¥ã‚Œæ›¿ã‚ã‚Šã¾ã™ã€‚
 bool Reversi::SetCheackVariation(IsMass targetMass, IsMass myMass, int y, int x) {
 	//if (Reversi::FindMassDate(x, y) != IsMass::None) {
-	//	cout << "ƒ}ƒX‚©‚Ô‚è" << '\n';
+	//	cout << "ãƒã‚¹ã‹ã¶ã‚Š" << '\n';
 	//	return false;
 	//}
 		
 	bool returnbool = false;;
 
-	//Še•ûŒü‚Åƒ}ƒX‚Ìó‘Ô‚ğŠm”F‚µ‚Ü‚·
+	//å„æ–¹å‘ã§ãƒã‚¹ã®çŠ¶æ…‹ã‚’ç¢ºèªã—ã¾ã™
 	//x++
 	if (CheackReverse(y, x, targetMass, myMass, 0, 1))
 		returnbool = true;
@@ -448,12 +304,12 @@ bool Reversi::SetCheackVariation(IsMass targetMass, IsMass myMass, int y, int x)
 		returnbool = true;
 
 	//if (!returnbool)
-	//	cout << "‘±¸”s" << '\n';
+	//	cout << "æŒç¶šå¤±æ•—" << '\n';
 
 	return returnbool;
 }
 
-//I—¹‚©‚Ç‚¤‚©‚ğ”½“]‚µ‚Ü‚·
+//çµ‚äº†ã‹ã©ã†ã‹ã‚’åè»¢ã—ã¾ã™
 void Reversi::EndPlayerSet() {
 	noSetPlayer = !noSetPlayer;
 }
@@ -465,7 +321,7 @@ std::vector<std::vector<int>> Reversi::FindAllOkSetMassPoints(IsMass targetMass,
 	std::vector<std::vector<int>> randomPoint;
 	int count = 0;
 
-	//”z’u‚Å‚«‚éˆÊ’uƒf[ƒ^‚Ì‚İ‚ğæ“¾
+	//é…ç½®ã§ãã‚‹ä½ç½®ãƒ‡ãƒ¼ã‚¿ã®ã¿ã‚’å–å¾—
 	for (int y = 0; y < _massMax; y++) {
 		for (int x = 0; x < _massMax; x++) {
 			if (SetCheack(targetMass, setIsMass, y, x)) {
@@ -483,29 +339,7 @@ std::vector<std::vector<int>> Reversi::FindAllOkSetMassPoints(IsMass targetMass,
 bool Reversi::EndGame() {
 
 	if (noSetPlayer == true && noSetEnemy == true) {
-		int white = 0;
-		int black = 0;
-
-		//”z’u‚Å‚«‚éˆÊ’uƒf[ƒ^‚Ì‚İ‚ğæ“¾
-		for (int y = 0; y < _massMax; y++) {
-			for (int x = 0; x < _massMax; x++) {
-				if (mass[y][x].GetThisMass() == IsMass::White)
-					white++;
-				else if (mass[y][x].GetThisMass() == IsMass::Black)
-					black++;
-
-			}
-		}
-
-		cout << "• " << black << " ŒÂ " << "”’ " << white << " ŒÂ " << '\n';
-		string winer = "ˆø‚«•ª‚¯";
-		if (black > white)
-			winer = "“G‚ÌŸ‚¿";
-		else if (black < white)
-			winer = "ƒvƒŒƒCƒ„[‚ÌŸ‚¿";
-		cout << "Œ‹‰Ê‚Í " << winer<<'\n';
-
-
+		Result();
 		return true;
 	}
 	else {
@@ -516,32 +350,57 @@ bool Reversi::EndGame() {
 	}
 }
 
+void Reversi::Result() {
+	int white = 0;
+	int black = 0;
+
+	//é…ç½®ã§ãã‚‹ä½ç½®ãƒ‡ãƒ¼ã‚¿ã®ã¿ã‚’å–å¾—
+	for (int y = 0; y < _massMax; y++) {
+		for (int x = 0; x < _massMax; x++) {
+			if (mass[y][x].GetThisMass() == IsMass::White)
+				white++;
+			else if (mass[y][x].GetThisMass() == IsMass::Black)
+				black++;
+
+		}
+	}
+
+	cout << "é»’ " << black << " å€‹ " << "ç™½ " << white << " å€‹ " << '\n';
+	string winer = "å¼•ãåˆ†ã‘";
+	if (black > white)
+		winer = "æ•µã®å‹ã¡";
+	else if (black < white)
+		winer = "ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹ã¡";
+	cout << "çµæœã¯ " << winer << '\n';
+
+}
+
 
 ReversiAI::ReversiAI(std::shared_ptr<Reversi> _game,int massMax) :game(_game),_massMax(massMax) {
 
 }
 
-//I—¹‚È‚çtrue‚ª•Ô‚Á‚Ä‚«‚Ü‚·
+//çµ‚äº†ãªã‚‰trueãŒè¿”ã£ã¦ãã¾ã™
 bool ReversiAI::InputSetMass(IsMass setIsMass, IsMass targetMass) {
-	string coments[13] = { "“ü—Íó•tó‘ÔF1`",
-		"o‰¡²p‚Å”z’u‚µ‚½‚¢ˆÊ’u‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B : o0p‚Å“ü—Í’l‚ğƒŠƒZƒbƒg‚µ‚Ü‚·",
-		"oc²p‚Å”z’u‚µ‚½‚¢ˆÊ’u‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B : o0p‚Å“ü—Í’l‚ğƒŠƒZƒbƒg‚µ‚Ü‚·",
-		"”š‚Å1`",
-		"‚ ‚È‚½‚Í",
-		"c",
-		"‰¡",
-		"‚ÌˆÊ’u‚É”z’u‚µ‚Ü‚µ‚½B" ,
-		"‚»‚±‚É‚Í‚·‚Å‚É‰½‚©‚ª‘¶İ‚µ‚Ü‚·B",
-		"‚»‚ÌˆÊ’u‚Íƒ}ƒX‚ğ’u‚¯‚Ü‚¹‚ñB",
-		"‚Ü‚Å‚Ì’l‚ğó‚¯•t‚¯‚Ü‚·B‚Ü‚½Aoep‚Æ‘Å‚Â‚ÆI—¹‚µ‚Ü‚·",
-		"‚Ü‚Å‚Ì’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B",
-		"‚ ‚È‚½‚Í—‚Å‚·B“G‚ÍZ‚Å‚·B"
+	string coments[13] = { "å…¥åŠ›å—ä»˜çŠ¶æ…‹ï¼š1ï½",
+		"ï½›æ¨ªè»¸ï½ã§é…ç½®ã—ãŸã„ä½ç½®ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚ : ï½›0ï½ã§å…¥åŠ›å€¤ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã™",
+		"ï½›ç¸¦è»¸ï½ã§é…ç½®ã—ãŸã„ä½ç½®ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚ : ï½›0ï½ã§å…¥åŠ›å€¤ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã™",
+		"æ•°å­—ã§1ï½",
+		"ã‚ãªãŸã¯",
+		"ç¸¦",
+		"æ¨ª",
+		"ã®ä½ç½®ã«é…ç½®ã—ã¾ã—ãŸã€‚" ,
+		"ãã“ã«ã¯ã™ã§ã«ä½•ã‹ãŒå­˜åœ¨ã—ã¾ã™ã€‚",
+		"ãã®ä½ç½®ã¯ãƒã‚¹ã‚’ç½®ã‘ã¾ã›ã‚“ã€‚",
+		"ã¾ã§ã®å€¤ã‚’å—ã‘ä»˜ã‘ã¾ã™ã€‚ã¾ãŸã€ï½›eï½ã¨æ‰“ã¤ã¨çµ‚äº†ã—ã¾ã™",
+		"ã¾ã§ã®åŠè§’æ•°å­—ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚",
+		"ã‚ãªãŸã¯ã€‡ã§ã™ã€‚æ•µã¯ï¼ ã§ã™ã€‚"
 	};
 
 	std::vector<std::vector<int>> randomPoint = game->FindAllOkSetMassPoints(targetMass, setIsMass);
 
 	if (randomPoint.size() == 0) {
-		cout << "‚È‚ñ‚Æ" << coments[4] << "’u‚¯‚éêŠ‚ª–³‚¢I" << '\n';
+		cout << "ãªã‚“ã¨" << coments[4] << "ç½®ã‘ã‚‹å ´æ‰€ãŒç„¡ã„ï¼" << '\n';
 		if (setIsMass == game->GetPlayerColor()) {
 			game->EndPlayerSet();
 		}
@@ -566,6 +425,8 @@ bool ReversiAI::InputSetMass(IsMass setIsMass, IsMass targetMass) {
 		bool endFlagY = false;
 		bool endFlagX = false;
 		do {
+			// game->ShowGrid();
+
 			cout << coments[1] << '\n';
 
 			int input = InputFx();
@@ -621,7 +482,6 @@ bool ReversiAI::InputSetMass(IsMass setIsMass, IsMass targetMass) {
 			if (game->FindMassDate(setPoint[1], setPoint[0]) != IsMass::None) {
 				cout << coments[9] << '\n';
 				returnFlag = true;
-
 				game->ShowGrid();
 			}
 
@@ -651,7 +511,7 @@ bool ReversiAI::InputSetMass(IsMass setIsMass, IsMass targetMass) {
 	return returnEnd;
 }
 
-//ƒ‰ƒ“ƒ_ƒ€‚Åƒ}ƒX‚ğ”z’u‚µ‚Ü‚·B
+//ãƒ©ãƒ³ãƒ€ãƒ ã§ãƒã‚¹ã‚’é…ç½®ã—ã¾ã™ã€‚
 void ReversiAI::RandomSetMass(IsMass setIsMass, IsMass targetMass, string mess) {
 
 	std::mt19937 engine{ std::random_device{}() };
@@ -659,7 +519,7 @@ void ReversiAI::RandomSetMass(IsMass setIsMass, IsMass targetMass, string mess) 
 	std::vector<std::vector<int>> randomPoint= game->FindAllOkSetMassPoints(targetMass, setIsMass);
 	
 	if (randomPoint.size() == 0) {
-		cout << "‚È‚ñ‚Æ" << mess << "’u‚¯‚éêŠ‚ª–³‚¢I" << '\n';
+		cout << "ãªã‚“ã¨" << mess << "ç½®ã‘ã‚‹å ´æ‰€ãŒç„¡ã„ï¼" << '\n';
 		if (setIsMass == game->GetPlayerColor()) {
 			game->EndPlayerSet();
 		}
@@ -670,16 +530,16 @@ void ReversiAI::RandomSetMass(IsMass setIsMass, IsMass targetMass, string mess) 
 	}
 	std::uniform_int_distribution<int> dist(0, static_cast<int>(randomPoint.size()) - 1);
 
-	//ƒ‰ƒ“ƒ_ƒ€‚Å’u‚¯‚é”z’u‚ÉÚ’n‚µ‚Ü‚·B
+	//ãƒ©ãƒ³ãƒ€ãƒ ã§ç½®ã‘ã‚‹é…ç½®ã«æ¥åœ°ã—ã¾ã™ã€‚
 	auto target = dist(engine);
 	game->RuleSetAndVariationMassDate(randomPoint[target][1], randomPoint[target][0], setIsMass, targetMass);
 
-	std::cout << mess << "‰¡" << randomPoint[target][1] + 1 << "c" << randomPoint[target][0] + 1 << "’u‚«‚Ü‚µ‚½B" << '\n';
+	std::cout << mess << "æ¨ª" << randomPoint[target][1] + 1 << "ç¸¦" << randomPoint[target][0] + 1 << "ç½®ãã¾ã—ãŸã€‚" << '\n';
 
 }
 
-//ƒvƒŒƒCƒ„[‚©‚ç”š‚ğŠl“¾‚µ‚Ü‚·B
-//-1ƒGƒ‰[ -2I—¹ -3‚â‚è‚È‚¨‚µ
+//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰æ•°å­—ã‚’ç²å¾—ã—ã¾ã™ã€‚
+//-1ã‚¨ãƒ©ãƒ¼ -2çµ‚äº† -3ã‚„ã‚ŠãªãŠã—
 int ReversiAI::InputFx(char endif, char returnif) {
 	string input;
 	cin >> input;
@@ -687,24 +547,25 @@ int ReversiAI::InputFx(char endif, char returnif) {
 
 	int reutrnInt = 0;
 	for (int i = 0; i < input.length(); i++) {
-		//”š1`‚X‚È‚ç
+		//æ•°å­—1ï½ï¼™ãªã‚‰
 		if (input[i] >= '1' && input[i] <= '9') {
-			//ˆÈ‘O‚ÉƒŠƒ^[ƒ“‚É•ÏX‚ª‰Á‚¦‚ç‚ê‚Ä‚é‚È‚ç‚QŒ…–Ú
+			//ä»¥å‰ã«ãƒªã‚¿ãƒ¼ãƒ³ã«å¤‰æ›´ãŒåŠ ãˆã‚‰ã‚Œã¦ã‚‹ãªã‚‰ï¼’æ¡ç›®
 			if (reutrnInt != 0) {
 				reutrnInt = -1;
+				cout << "ï¼’æ¡ä»¥ä¸Šã®å…¥åŠ›ã§ã™ã€‚";
 				break;
 			}
 			reutrnInt = (input[i] - '0') - 1;
 		}
-		//I—¹”»’è
+		//çµ‚äº†åˆ¤å®š
 		else if (input[i] == endif) {
 			reutrnInt = -2;
 		}
-		//‚â‚è‚È‚¨‚µ”»’è
+		//ã‚„ã‚ŠãªãŠã—åˆ¤å®š
 		else if (input[i] == returnif) {
 			reutrnInt = -3;
 		}
-		//ƒGƒ‰[”»’è
+		//ã‚¨ãƒ©ãƒ¼åˆ¤å®š
 		else {
 			reutrnInt = -1;
 		}

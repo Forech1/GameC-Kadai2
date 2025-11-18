@@ -28,14 +28,22 @@ int main() {
 
 		gamedate->ShowGrid();
 
-		cout << "“G‚ªl‚¦‚Ä‚¢‚Ü‚·c" << '\n';
 
-		time.WaitTime(1.5f);
 
-		if(!endFlag)
-			ai.RandomSetMass(gamedate->GetEnemyColor(), gamedate->GetPlayerColor(),"“G‚Í");
+		if (!endFlag) {
+			cout << "“G‚ªl‚¦‚Ä‚¢‚Ü‚·c" << '\n';
 
-		endFlag = gamedate->EndGame();
+			time.WaitTime(1.5f);
+
+			ai.RandomSetMass(gamedate->GetEnemyColor(), gamedate->GetPlayerColor(), "“G‚Í");
+
+			endFlag = gamedate->EndGame();
+		}
+			
+		else
+			gamedate->Result();
+
+		
 
 	} while (!endFlag);
 
